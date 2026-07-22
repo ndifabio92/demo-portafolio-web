@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <!-- Viewport: clave para que el diseño sea responsive en celulares y tablets -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio de Nicolás Di Fabio — Desarrollador Full Stack SSr (.NET, NodeJS/NestJS, React TS) en camino a DevOps." />
+  <title>Nicolás Di Fabio · Full Stack Developer</title>
+
+  <style>
+    /* ===========================================================
+       VARIABLES DE COLOR Y TEMA (diseño oscuro + violeta de acento)
+       =========================================================== */
+    :root {
+      --bg:        #0d0d12;   /* fondo principal oscuro */
+      --bg-soft:   #16161f;   /* fondo de tarjetas / secciones */
+      --bg-hover:  #1e1e2b;   /* fondo al pasar el cursor */
+      --text:      #e7e7ef;   /* texto principal */
+      --text-dim:  #9a9ab0;   /* texto secundario / apagado */
+      --accent:    #7C3AED;   /* VIOLETA de acento pedido */
+      --accent-2:  #a06bff;   /* violeta más claro para hovers/degradados */
+      --border:    #26263a;   /* bordes sutiles */
+      --radius:    16px;      /* bordes redondeados globales */
+      --shadow:    0 10px 30px rgba(0, 0, 0, 0.45);          /* sombra suave */
+      --shadow-accent: 0 12px 30px rgba(124, 58, 237, 0.35); /* sombra violeta */
+    }
+
+    /* ===========================================================
+       RESET Y BASE
+       =========================================================== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; } /* scroll suave entre secciones */
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      /* Brillo violeta muy sutil de fondo para dar profundidad */
+      background-image:
+        radial-gradient(circle at 15% 0%, rgba(124, 58, 237, 0.14), transparent 40%),
+        radial-gradient(circle at 85% 100%, rgba(124, 58, 237, 0.08), transparent 40%);
+      background-attachment: fixed;
+    }
+
+    /* Contenedor central reutilizable para limitar el ancho */
+    .container {
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Separación vertical estándar entre secciones */
+    section { padding: 90px 0; }
+
+    /* Títulos de sección con detalle violeta a la izquierda */
+    .section-title {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      margin-bottom: 12px;
+      border-left: 4px solid var(--accent);
+      padding-left: 14px;
+    }
+    .section-subtitle {
+      color: var(--text-dim);
+      margin-bottom: 40px;
+      padding-left: 18px;
+    }
+
+    /* ===========================================================
+       BOTONES (con animación al pasar el cursor)
+       =========================================================== */
+    .btn {
+      display: inline-block;
+      padding: 12px 26px;
+      border-radius: 999px;              /* pill totalmente redondeada */
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+    /* Botón primario: relleno violeta */
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: var(--shadow-accent);
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px) scale(1.03);  /* se eleva al pasar el cursor */
+      background: var(--accent-2);
+      box-shadow: 0 16px 40px rgba(124, 58, 237, 0.5);
+    }
+    /* Botón secundario: contorno */
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      color: var(--accent-2);
+    }
+
+    /* ===========================================================
+       NAVBAR (barra de navegación superior fija)
+       =========================================================== */
+    header.nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(13, 13, 18, 0.7);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .logo { font-weight: 700; font-size: 1.15rem; }
+    .logo span { color: var(--accent-2); } /* punto de acento en el logo */
+    .nav-links { display: flex; gap: 24px; list-style: none; }
+    .nav-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ===========================================================
+       HERO (sección principal con nombre y presentación)
+       =========================================================== */
+    .hero {
+      min-height: calc(100vh - 64px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+    .hero .eyebrow {
+      color: var(--accent-2);
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 7vw, 4.2rem);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    /* Nombre resaltado con degradado violeta */
+    .hero h1 .grad {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      max-width: 660px;
+      margin: 0 auto 34px;
+      color: var(--text-dim);
+      font-size: 1.1rem;
+    }
+    .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    /* Chips pequeños (idiomas, certificación) debajo de los botones del hero */
+    .hero-badges {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+    .chip {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 999px;
+    }
+    .chip strong { color: var(--accent-2); }
+
+    /* ===========================================================
+       SOBRE MÍ
+       =========================================================== */
+    .about-card {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px;
+      box-shadow: var(--shadow);
+    }
+    .about-card p { color: var(--text-dim); font-size: 1.05rem; }
+    .about-card p + p { margin-top: 16px; }
+
+    /* ===========================================================
+       GRID DE TARJETAS (reutilizado por Stack, Skills, Proyectos)
+       =========================================================== */
+    .card-grid {
+      display: grid;
+      gap: 18px;
+    }
+    /* Variante para chips de tecnología (más columnas, más compactas) */
+    .grid-tech { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+    /* Variante para proyectos (tarjetas más grandes) */
+    .grid-projects { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+
+    /* Tarjeta base de tecnología (stack + skills) */
+    .tech {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 18px;
+      text-align: center;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .tech:hover {                       /* animación al pasar el cursor */
+      transform: translateY(-6px);
+      border-color: var(--accent);
+      box-shadow: var(--shadow-accent);
+    }
+    .tech .icon { font-size: 1.9rem; margin-bottom: 10px; }
+    .tech .name { font-weight: 600; }
+    .tech .name small { display: block; color: var(--text-dim); font-weight: 400; font-size: 0.78rem; margin-top: 4px; }
+
+    /* ===========================================================
+       EXPERIENCIA (línea de tiempo simple)
+       =========================================================== */
+    .timeline { border-left: 2px solid var(--border); margin-left: 6px; }
+    .timeline-item { position: relative; padding: 0 0 30px 28px; }
+    .timeline-item:last-child { padding-bottom: 0; }
+    /* Punto violeta en cada hito de la línea de tiempo */
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -8px;
+      top: 4px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.18);
+    }
+    .timeline-item .role { font-weight: 600; font-size: 1.1rem; }
+    .timeline-item .company { color: var(--accent-2); }
+    .timeline-item .period { color: var(--text-dim); font-size: 0.85rem; margin: 2px 0 8px; }
+    .timeline-item .desc { color: var(--text-dim); }
+
+    /* ===========================================================
+       PROYECTOS (tarjetas)
+       =========================================================== */
+    .project-card {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .project-card:hover {               /* animación al pasar el cursor */
+      transform: translateY(-8px);
+      border-color: var(--accent);
+      box-shadow: var(--shadow-accent);
+    }
+    .badge {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--accent-2);
+      background: rgba(124, 58, 237, 0.12);
+      border: 1px solid rgba(124, 58, 237, 0.35);
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+    .project-card h3 { font-size: 1.25rem; margin-bottom: 10px; }
+    .project-card p { color: var(--text-dim); flex-grow: 1; margin-bottom: 18px; }
+    /* Etiquetas de tecnologías usadas en cada proyecto */
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+    .tag {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    /* ===========================================================
+       CONTACTO
+       =========================================================== */
+    .contact { text-align: center; }
+    .contact-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 26px;
+    }
+
+    /* ===========================================================
+       FOOTER
+       =========================================================== */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 34px 0;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+    footer a { color: var(--accent-2); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ===========================================================
+       RESPONSIVE: ajustes para tablets y celulares
+       =========================================================== */
+    @media (max-width: 640px) {
+      /* Ocultamos los links del menú en pantallas chicas para que no se amontonen */
+      .nav-links { display: none; }
+      section { padding: 64px 0; }
+      .about-card { padding: 26px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ====================== NAVBAR ====================== -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="logo">Nicolás<span>.</span>DiFabio</div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#sobre-mi">Sobre mí</a></li>
+          <li><a href="#stack">Stack</a></li>
+          <li><a href="#skills">DevOps</a></li>
+          <li><a href="#experiencia">Experiencia</a></li>
+          <li><a href="#proyectos">Proyectos</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ====================== HERO / PRINCIPAL ====================== -->
+    <section class="hero container" id="inicio">
+      <p class="eyebrow">Full Stack Developer SSr · DevOps en formación</p>
+      <h1>Hola, soy <span class="grad">Nicolás Di Fabio</span></h1>
+      <p>
+        Desarrollador Full Stack Semi Senior con sólida experiencia en backend
+        (<strong>.NET</strong> y <strong>NodeJS/NestJS</strong>) y frontend con
+        <strong>React &amp; TypeScript</strong>. Creo APIs robustas, microservicios
+        y arquitecturas escalables — y ahora estoy dando el salto al mundo
+        <strong>DevOps</strong>: automatización, contenedores, IaC y cloud.
+      </p>
+      <div class="hero-actions">
+        <!-- Botón que lleva a la sección de proyectos -->
+        <a href="#proyectos" class="btn btn-primary">Ver proyectos</a>
+        <a href="#contacto" class="btn btn-outline">Contactarme</a>
+      </div>
+      <!-- Datos rápidos: certificación e idiomas -->
+      <div class="hero-badges">
+        <span class="chip">📍 Argentina</span>
+        <span class="chip"><strong>Azure</strong> Fundamentals Certified</span>
+        <span class="chip">🗣️ Español nativo · Inglés profesional</span>
+      </div>
+    </section>
+
+    <!-- ====================== SOBRE MÍ ====================== -->
+    <section id="sobre-mi">
+      <div class="container">
+        <h2 class="section-title">Sobre mí</h2>
+        <p class="section-subtitle">Quién soy y hacia dónde voy</p>
+        <div class="about-card">
+          <p>
+            Soy desarrollador <strong>SSr Fullstack</strong> con sólida experiencia en
+            backend con .NET y NodeJS/NestJS, y conocimientos de frontend con React y
+            TypeScript. Me especializo en crear APIs robustas, microservicios y
+            arquitecturas escalables.
+          </p>
+          <p>
+            Disfruto los proyectos que combinan un backend sólido con buenas prácticas de
+            integración y despliegue (Docker, CI/CD, Cloud). Por eso hoy estoy cursando un
+            bootcamp de <strong>DevOps</strong>: quiero profundizar en automatización,
+            contenedores, infraestructura como código y cloud para llevar mis desarrollos
+            de punta a punta hasta producción.
+          </p>
+          <p>
+            Busco seguir creciendo en entornos que valoren la calidad del código, la
+            arquitectura limpia y la mejora continua.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== STACK ACTUAL ====================== -->
+    <section id="stack">
+      <div class="container">
+        <h2 class="section-title">Mi stack actual</h2>
+        <p class="section-subtitle">Tecnologías con las que trabajo hoy</p>
+        <div class="card-grid grid-tech">
+          <div class="tech"><div class="icon">🟣</div><div class="name">.NET<small>C# / .NET Core</small></div></div>
+          <div class="tech"><div class="icon">🟢</div><div class="name">NodeJS<small>NestJS</small></div></div>
+          <div class="tech"><div class="icon">⚛️</div><div class="name">React<small>TypeScript</small></div></div>
+          <div class="tech"><div class="icon">🅰️</div><div class="name">Angular</div></div>
+          <div class="tech"><div class="icon">☁️</div><div class="name">Azure<small>Functions</small></div></div>
+          <div class="tech"><div class="icon">🗄️</div><div class="name">SQL / Oracle</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== SKILLS DEVOPS QUE VOY A APRENDER ====================== -->
+    <section id="skills">
+      <div class="container">
+        <h2 class="section-title">Skills que voy a aprender</h2>
+        <p class="section-subtitle">El stack DevOps en el que me estoy formando</p>
+        <div class="card-grid grid-tech">
+          <!-- Cada tarjeta representa una tecnología del roadmap DevOps -->
+          <div class="tech"><div class="icon">🐧</div><div class="name">Linux</div></div>
+          <div class="tech"><div class="icon">🐳</div><div class="name">Docker</div></div>
+          <div class="tech"><div class="icon">🔄</div><div class="name">CI/CD</div></div>
+          <div class="tech"><div class="icon">☸️</div><div class="name">Kubernetes</div></div>
+          <div class="tech"><div class="icon">🏗️</div><div class="name">Terraform</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== EXPERIENCIA ====================== -->
+    <section id="experiencia">
+      <div class="container">
+        <h2 class="section-title">Experiencia</h2>
+        <p class="section-subtitle">Un recorrido por mis últimos años como developer</p>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="role">Full Stack Developer</div>
+            <div class="company">Iceberg Solutions</div>
+            <div class="period">Ago 2023 — Actualidad</div>
+            <p class="desc">
+              Soluciones digitales y consultoría IT. Mantenimiento y mejoras para el
+              cliente IDB (Inter-American Development Bank), con actualizaciones anuales
+              de la plataforma de reuniones de gobernadores e integración de servicios
+              externos con protocolos de seguridad.
+            </p>
+          </div>
+          <div class="timeline-item">
+            <div class="role">Full Stack Developer</div>
+            <div class="company">La Nación (vía RHT)</div>
+            <div class="period">Nov 2022 — Jul 2023</div>
+            <p class="desc">
+              Proyectos Bonvivir y Adquisición: desarrollo y mantenimiento de aplicaciones
+              web con REST/GraphQL, Next.js/React, NodeJS + Strapi, Docker, Redis y MySQL.
+            </p>
+          </div>
+          <div class="timeline-item">
+            <div class="role">Full Stack Developer</div>
+            <div class="company">Phinx Lab</div>
+            <div class="period">Feb 2022 — Oct 2022</div>
+            <p class="desc">
+              Aplicaciones internas con React, NodeJS, PostgreSQL y TypeScript.
+              Metodologías ágiles (Scrum), CI/CD, Jira y Bitbucket.
+            </p>
+          </div>
+          <div class="timeline-item">
+            <div class="role">Full Stack Developer</div>
+            <div class="company">Aeropuertos Argentina (vía RHT)</div>
+            <div class="period">Feb 2021 — Feb 2022</div>
+            <p class="desc">
+              Cliente AA2000: proyectos Rod, Tams y Capacity para gestión de vuelos y
+              operaciones. Stack C#/ASP.NET, .NET Core, React-Redux, Oracle y despliegues
+              con Azure DevOps.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== PROYECTOS ====================== -->
+    <section id="proyectos">
+      <div class="container">
+        <h2 class="section-title">Proyectos</h2>
+        <p class="section-subtitle">Algunos trabajos representativos</p>
+        <div class="card-grid grid-projects">
+
+          <!-- Proyecto 1: Bonvivir -->
+          <article class="project-card">
+            <span class="badge">La Nación</span>
+            <h3>Bonvivir</h3>
+            <p>
+              Plataforma e-commerce de un club de vinos: venta y envío de productos y
+              administración de usuarios. Trabajé el backend y la creación/mantenimiento
+              de las aplicaciones web.
+            </p>
+            <div class="tags">
+              <span class="tag">GraphQL</span><span class="tag">Next.js</span>
+              <span class="tag">NodeJS/Strapi</span><span class="tag">Docker</span>
+              <span class="tag">Redis</span><span class="tag">MySQL</span>
+            </div>
+            <a href="#" class="btn btn-outline">Ver detalles</a>
+          </article>
+
+          <!-- Proyecto 2: Aeropuertos Argentina -->
+          <article class="project-card">
+            <span class="badge">AA2000</span>
+            <h3>Tams &amp; Capacity</h3>
+            <p>
+              Sistemas de gestión de vuelos para Aeropuertos Argentina: notificación de
+              cambios, administración de parámetros aeroportuarios y organización de vuelos
+              según cada compañía.
+            </p>
+            <div class="tags">
+              <span class="tag">.NET Core</span><span class="tag">React</span>
+              <span class="tag">Oracle</span><span class="tag">Azure DevOps</span>
+            </div>
+            <a href="#" class="btn btn-outline">Ver detalles</a>
+          </article>
+
+          <!-- Proyecto 3: SterAPP -->
+          <article class="project-card">
+            <span class="badge">Integraciones</span>
+            <h3>SterAPP</h3>
+            <p>
+              Centralización de órdenes de compra, envíos y seguimientos de distintos
+              e-commerce (BNA, Megatone) conectados por múltiples APIs, con validación de
+              datos y generación de órdenes hacia Odoo.
+            </p>
+            <div class="tags">
+              <span class="tag">REST API</span><span class="tag">NodeJS</span>
+              <span class="tag">TypeScript</span><span class="tag">Odoo</span>
+            </div>
+            <a href="#" class="btn btn-outline">Ver detalles</a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== CONTACTO ====================== -->
+    <section id="contacto">
+      <div class="container contact">
+        <h2 class="section-title" style="display:inline-block; border-left:none; padding-left:0;">Contacto</h2>
+        <p class="section-subtitle" style="padding-left:0;">¿Charlamos? Me encontrás acá</p>
+        <div class="contact-actions">
+          <!-- Enlaces externos: se abren en una pestaña nueva -->
+          <a href="mailto:nicolasdifabio92@gmail.com" class="btn btn-primary">Email</a>
+          <a href="https://www.linkedin.com/in/nicolas-difabio" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn</a>
+          <a href="https://github.com/roxsross" target="_blank" rel="noopener" class="btn btn-outline">GitHub</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ====================== FOOTER ====================== -->
+  <footer>
+    <div class="container">
+      <p>© <span id="year"></span> Nicolás Di Fabio · Hecho con 💜 durante mi camino DevOps</p>
+      <p><a href="https://github.com/roxsross" target="_blank" rel="noopener">github.com/roxsross</a></p>
+    </div>
+  </footer>
+
+  <!-- ====================== JAVASCRIPT ====================== -->
+  <script>
+    // 1) Año dinámico en el footer (se actualiza solo cada año)
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // 2) Efecto sutil: sombra en la navbar según el scroll
+    const nav = document.querySelector('header.nav');
+    window.addEventListener('scroll', () => {
+      nav.style.boxShadow = window.scrollY > 20 ? '0 8px 24px rgba(0,0,0,0.5)' : 'none';
+    });
+
+    // 3) Aviso amable en los botones de proyectos que aún no tienen enlace real
+    document.querySelectorAll('.project-card .btn').forEach((boton) => {
+      boton.addEventListener('click', (e) => {
+        // Evitamos el salto de página porque el enlace es un placeholder "#"
+        e.preventDefault();
+        alert('Pronto voy a enlazar el detalle / repo de este proyecto. 🚀');
+      });
+    });
+  </script>
+</body>
+</html>
