@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <!-- Viewport: clave para que el diseño sea responsive en celulares y tablets -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Portfolio de Nicolás Di Fabio — Desarrollador Full Stack SSr (.NET, NodeJS/NestJS, React TS) en camino a DevOps." />
+  <meta name="description"
+    content="Portfolio de Nicolás Di Fabio — Desarrollador Full Stack SSr (.NET, NodeJS/NestJS, React TS) en camino a DevOps." />
   <title>Nicolás Di Fabio · Full Stack Developer</title>
 
   <style>
@@ -12,25 +14,44 @@
        VARIABLES DE COLOR Y TEMA (diseño oscuro + violeta de acento)
        =========================================================== */
     :root {
-      --bg:        #0d0d12;   /* fondo principal oscuro */
-      --bg-soft:   #16161f;   /* fondo de tarjetas / secciones */
-      --bg-hover:  #1e1e2b;   /* fondo al pasar el cursor */
-      --text:      #e7e7ef;   /* texto principal */
-      --text-dim:  #9a9ab0;   /* texto secundario / apagado */
-      --accent:    #7C3AED;   /* VIOLETA de acento pedido */
-      --accent-2:  #a06bff;   /* violeta más claro para hovers/degradados */
-      --border:    #26263a;   /* bordes sutiles */
-      --radius:    16px;      /* bordes redondeados globales */
-      --shadow:    0 10px 30px rgba(0, 0, 0, 0.45);          /* sombra suave */
-      --shadow-accent: 0 12px 30px rgba(124, 58, 237, 0.35); /* sombra violeta */
+      --bg: #0d0d12;
+      /* fondo principal oscuro */
+      --bg-soft: #16161f;
+      /* fondo de tarjetas / secciones */
+      --bg-hover: #1e1e2b;
+      /* fondo al pasar el cursor */
+      --text: #e7e7ef;
+      /* texto principal */
+      --text-dim: #9a9ab0;
+      /* texto secundario / apagado */
+      --accent: #7C3AED;
+      /* VIOLETA de acento pedido */
+      --accent-2: #a06bff;
+      /* violeta más claro para hovers/degradados */
+      --border: #26263a;
+      /* bordes sutiles */
+      --radius: 16px;
+      /* bordes redondeados globales */
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+      /* sombra suave */
+      --shadow-accent: 0 12px 30px rgba(124, 58, 237, 0.35);
+      /* sombra violeta */
     }
 
     /* ===========================================================
        RESET Y BASE
        =========================================================== */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    html { scroll-behavior: smooth; } /* scroll suave entre secciones */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* scroll suave entre secciones */
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -53,7 +74,9 @@
     }
 
     /* Separación vertical estándar entre secciones */
-    section { padding: 90px 0; }
+    section {
+      padding: 90px 0;
+    }
 
     /* Títulos de sección con detalle violeta a la izquierda */
     .section-title {
@@ -62,6 +85,7 @@
       border-left: 4px solid var(--accent);
       padding-left: 14px;
     }
+
     .section-subtitle {
       color: var(--text-dim);
       margin-bottom: 40px;
@@ -74,30 +98,36 @@
     .btn {
       display: inline-block;
       padding: 12px 26px;
-      border-radius: 999px;              /* pill totalmente redondeada */
+      border-radius: 999px;
+      /* pill totalmente redondeada */
       font-weight: 600;
       text-decoration: none;
       cursor: pointer;
       border: 1px solid transparent;
       transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
     }
+
     /* Botón primario: relleno violeta */
     .btn-primary {
       background: var(--accent);
       color: #fff;
       box-shadow: var(--shadow-accent);
     }
+
     .btn-primary:hover {
-      transform: translateY(-3px) scale(1.03);  /* se eleva al pasar el cursor */
+      transform: translateY(-3px) scale(1.03);
+      /* se eleva al pasar el cursor */
       background: var(--accent-2);
       box-shadow: 0 16px 40px rgba(124, 58, 237, 0.5);
     }
+
     /* Botón secundario: contorno */
     .btn-outline {
       background: transparent;
       color: var(--text);
       border: 1px solid var(--border);
     }
+
     .btn-outline:hover {
       transform: translateY(-3px);
       border-color: var(--accent);
@@ -115,22 +145,40 @@
       background: rgba(13, 13, 18, 0.7);
       border-bottom: 1px solid var(--border);
     }
+
     .nav-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
       height: 64px;
     }
-    .logo { font-weight: 700; font-size: 1.15rem; }
-    .logo span { color: var(--accent-2); } /* punto de acento en el logo */
-    .nav-links { display: flex; gap: 24px; list-style: none; }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.15rem;
+    }
+
+    .logo span {
+      color: var(--accent-2);
+    }
+
+    /* punto de acento en el logo */
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
     .nav-links a {
       color: var(--text-dim);
       text-decoration: none;
       font-size: 0.95rem;
       transition: color 0.2s ease;
     }
-    .nav-links a:hover { color: var(--text); }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
 
     /* ===========================================================
        HERO (sección principal con nombre y presentación)
@@ -142,6 +190,7 @@
       justify-content: center;
       text-align: center;
     }
+
     .hero .eyebrow {
       color: var(--accent-2);
       font-weight: 600;
@@ -150,11 +199,13 @@
       font-size: 0.8rem;
       margin-bottom: 16px;
     }
+
     .hero h1 {
       font-size: clamp(2.4rem, 7vw, 4.2rem);
       line-height: 1.1;
       margin-bottom: 20px;
     }
+
     /* Nombre resaltado con degradado violeta */
     .hero h1 .grad {
       background: linear-gradient(90deg, var(--accent), var(--accent-2));
@@ -162,13 +213,20 @@
       background-clip: text;
       -webkit-text-fill-color: transparent;
     }
+
     .hero p {
       max-width: 660px;
       margin: 0 auto 34px;
       color: var(--text-dim);
       font-size: 1.1rem;
     }
-    .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
 
     /* Chips pequeños (idiomas, certificación) debajo de los botones del hero */
     .hero-badges {
@@ -178,6 +236,7 @@
       flex-wrap: wrap;
       margin-top: 30px;
     }
+
     .chip {
       font-size: 0.8rem;
       color: var(--text-dim);
@@ -186,7 +245,10 @@
       padding: 6px 14px;
       border-radius: 999px;
     }
-    .chip strong { color: var(--accent-2); }
+
+    .chip strong {
+      color: var(--accent-2);
+    }
 
     /* ===========================================================
        SOBRE MÍ
@@ -198,8 +260,15 @@
       padding: 36px;
       box-shadow: var(--shadow);
     }
-    .about-card p { color: var(--text-dim); font-size: 1.05rem; }
-    .about-card p + p { margin-top: 16px; }
+
+    .about-card p {
+      color: var(--text-dim);
+      font-size: 1.05rem;
+    }
+
+    .about-card p+p {
+      margin-top: 16px;
+    }
 
     /* ===========================================================
        GRID DE TARJETAS (reutilizado por Stack, Skills, Proyectos)
@@ -208,10 +277,17 @@
       display: grid;
       gap: 18px;
     }
+
     /* Variante para chips de tecnología (más columnas, más compactas) */
-    .grid-tech { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+    .grid-tech {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
     /* Variante para proyectos (tarjetas más grandes) */
-    .grid-projects { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+    .grid-projects {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
 
     /* Tarjeta base de tecnología (stack + skills) */
     .tech {
@@ -222,21 +298,48 @@
       text-align: center;
       transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
-    .tech:hover {                       /* animación al pasar el cursor */
+
+    .tech:hover {
+      /* animación al pasar el cursor */
       transform: translateY(-6px);
       border-color: var(--accent);
       box-shadow: var(--shadow-accent);
     }
-    .tech .icon { font-size: 1.9rem; margin-bottom: 10px; }
-    .tech .name { font-weight: 600; }
-    .tech .name small { display: block; color: var(--text-dim); font-weight: 400; font-size: 0.78rem; margin-top: 4px; }
+
+    .tech .icon {
+      font-size: 1.9rem;
+      margin-bottom: 10px;
+    }
+
+    .tech .name {
+      font-weight: 600;
+    }
+
+    .tech .name small {
+      display: block;
+      color: var(--text-dim);
+      font-weight: 400;
+      font-size: 0.78rem;
+      margin-top: 4px;
+    }
 
     /* ===========================================================
        EXPERIENCIA (línea de tiempo simple)
        =========================================================== */
-    .timeline { border-left: 2px solid var(--border); margin-left: 6px; }
-    .timeline-item { position: relative; padding: 0 0 30px 28px; }
-    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline {
+      border-left: 2px solid var(--border);
+      margin-left: 6px;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 0 0 30px 28px;
+    }
+
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
     /* Punto violeta en cada hito de la línea de tiempo */
     .timeline-item::before {
       content: "";
@@ -249,10 +352,25 @@
       background: var(--accent);
       box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.18);
     }
-    .timeline-item .role { font-weight: 600; font-size: 1.1rem; }
-    .timeline-item .company { color: var(--accent-2); }
-    .timeline-item .period { color: var(--text-dim); font-size: 0.85rem; margin: 2px 0 8px; }
-    .timeline-item .desc { color: var(--text-dim); }
+
+    .timeline-item .role {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .timeline-item .company {
+      color: var(--accent-2);
+    }
+
+    .timeline-item .period {
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      margin: 2px 0 8px;
+    }
+
+    .timeline-item .desc {
+      color: var(--text-dim);
+    }
 
     /* ===========================================================
        PROYECTOS (tarjetas)
@@ -267,11 +385,14 @@
       box-shadow: var(--shadow);
       transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
-    .project-card:hover {               /* animación al pasar el cursor */
+
+    .project-card:hover {
+      /* animación al pasar el cursor */
       transform: translateY(-8px);
       border-color: var(--accent);
       box-shadow: var(--shadow-accent);
     }
+
     .badge {
       display: inline-block;
       align-self: flex-start;
@@ -286,10 +407,26 @@
       border-radius: 999px;
       margin-bottom: 16px;
     }
-    .project-card h3 { font-size: 1.25rem; margin-bottom: 10px; }
-    .project-card p { color: var(--text-dim); flex-grow: 1; margin-bottom: 18px; }
+
+    .project-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+    }
+
+    .project-card p {
+      color: var(--text-dim);
+      flex-grow: 1;
+      margin-bottom: 18px;
+    }
+
     /* Etiquetas de tecnologías usadas en cada proyecto */
-    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
     .tag {
       font-size: 0.75rem;
       color: var(--text-dim);
@@ -301,7 +438,10 @@
     /* ===========================================================
        CONTACTO
        =========================================================== */
-    .contact { text-align: center; }
+    .contact {
+      text-align: center;
+    }
+
     .contact-actions {
       display: flex;
       gap: 16px;
@@ -320,17 +460,33 @@
       color: var(--text-dim);
       font-size: 0.9rem;
     }
-    footer a { color: var(--accent-2); text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
+
+    footer a {
+      color: var(--accent-2);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
 
     /* ===========================================================
        RESPONSIVE: ajustes para tablets y celulares
        =========================================================== */
     @media (max-width: 640px) {
+
       /* Ocultamos los links del menú en pantallas chicas para que no se amontonen */
-      .nav-links { display: none; }
-      section { padding: 64px 0; }
-      .about-card { padding: 26px; }
+      .nav-links {
+        display: none;
+      }
+
+      section {
+        padding: 64px 0;
+      }
+
+      .about-card {
+        padding: 26px;
+      }
     }
   </style>
 </head>
@@ -412,12 +568,30 @@
         <h2 class="section-title">Mi stack actual</h2>
         <p class="section-subtitle">Tecnologías con las que trabajo hoy</p>
         <div class="card-grid grid-tech">
-          <div class="tech"><div class="icon">🟣</div><div class="name">.NET<small>C# / .NET Core</small></div></div>
-          <div class="tech"><div class="icon">🟢</div><div class="name">NodeJS<small>NestJS</small></div></div>
-          <div class="tech"><div class="icon">⚛️</div><div class="name">React<small>TypeScript</small></div></div>
-          <div class="tech"><div class="icon">🅰️</div><div class="name">Angular</div></div>
-          <div class="tech"><div class="icon">☁️</div><div class="name">Azure<small>Functions</small></div></div>
-          <div class="tech"><div class="icon">🗄️</div><div class="name">SQL / Oracle</div></div>
+          <div class="tech">
+            <div class="icon">🟣</div>
+            <div class="name">.NET<small>C# / .NET Core</small></div>
+          </div>
+          <div class="tech">
+            <div class="icon">🟢</div>
+            <div class="name">NodeJS<small>NestJS</small></div>
+          </div>
+          <div class="tech">
+            <div class="icon">⚛️</div>
+            <div class="name">React<small>TypeScript</small></div>
+          </div>
+          <div class="tech">
+            <div class="icon">🅰️</div>
+            <div class="name">Angular</div>
+          </div>
+          <div class="tech">
+            <div class="icon">☁️</div>
+            <div class="name">Azure<small>Functions</small></div>
+          </div>
+          <div class="tech">
+            <div class="icon">🗄️</div>
+            <div class="name">SQL / Oracle</div>
+          </div>
         </div>
       </div>
     </section>
@@ -429,11 +603,26 @@
         <p class="section-subtitle">El stack DevOps en el que me estoy formando</p>
         <div class="card-grid grid-tech">
           <!-- Cada tarjeta representa una tecnología del roadmap DevOps -->
-          <div class="tech"><div class="icon">🐧</div><div class="name">Linux</div></div>
-          <div class="tech"><div class="icon">🐳</div><div class="name">Docker</div></div>
-          <div class="tech"><div class="icon">🔄</div><div class="name">CI/CD</div></div>
-          <div class="tech"><div class="icon">☸️</div><div class="name">Kubernetes</div></div>
-          <div class="tech"><div class="icon">🏗️</div><div class="name">Terraform</div></div>
+          <div class="tech">
+            <div class="icon">🐧</div>
+            <div class="name">Linux</div>
+          </div>
+          <div class="tech">
+            <div class="icon">🐳</div>
+            <div class="name">Docker</div>
+          </div>
+          <div class="tech">
+            <div class="icon">🔄</div>
+            <div class="name">CI/CD</div>
+          </div>
+          <div class="tech">
+            <div class="icon">☸️</div>
+            <div class="name">Kubernetes</div>
+          </div>
+          <div class="tech">
+            <div class="icon">🏗️</div>
+            <div class="name">Terraform</div>
+          </div>
         </div>
       </div>
     </section>
@@ -555,8 +744,9 @@
         <div class="contact-actions">
           <!-- Enlaces externos: se abren en una pestaña nueva -->
           <a href="mailto:nicolasdifabio92@gmail.com" class="btn btn-primary">Email</a>
-          <a href="https://www.linkedin.com/in/nicolas-difabio" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn</a>
-          <a href="https://github.com/roxsross" target="_blank" rel="noopener" class="btn btn-outline">GitHub</a>
+          <a href="https://www.linkedin.com/in/nicolas-di-fabio" target="_blank" rel="noopener"
+            class="btn btn-outline">LinkedIn</a>
+          <a href="https://github.com/ndifabio92" target="_blank" rel="noopener" class="btn btn-outline">GitHub</a>
         </div>
       </div>
     </section>
@@ -566,7 +756,7 @@
   <footer>
     <div class="container">
       <p>© <span id="year"></span> Nicolás Di Fabio · Hecho con 💜 durante mi camino DevOps</p>
-      <p><a href="https://github.com/roxsross" target="_blank" rel="noopener">github.com/roxsross</a></p>
+      <p><a href="https://github.com/ndifabio92" target="_blank" rel="noopener">github.com/ndifabio92</a></p>
     </div>
   </footer>
 
@@ -591,4 +781,5 @@
     });
   </script>
 </body>
+
 </html>
